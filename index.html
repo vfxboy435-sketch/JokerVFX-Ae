@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VFX MASTER PORTFOLIO</title>
+    <title>JOKER VFX | PORTFOLIO</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600&family=Syncopate:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -12,85 +12,86 @@
     <style>
         :root {
             --bg-color: #020205;
-            --accent-color: #00f3ff;
-            --secondary-color: #7000ff;
+            --accent-color: #00f3ff; 
             --text-color: #ffffff;
             --glass-bg: rgba(255, 255, 255, 0.03);
             --glass-border: rgba(255, 255, 255, 0.08);
+            --glow-strength: 0 0 20px var(--accent-color);
+            transition: --accent-color 1s ease-in-out; 
         }
 
         * { box-sizing: border-box; cursor: none; }
-        body { margin: 0; background-color: var(--bg-color); color: var(--text-color); font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; }
+        body { margin: 0; background-color: var(--bg-color); color: var(--text-color); font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
 
         #vfx-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: #020205; }
 
-        /* === 1. NAVIGATION BAR === */
+        .glow-text { color: white; transition: text-shadow 1s ease, color 1s ease; text-shadow: var(--glow-strength); }
+
         nav {
             position: fixed; top: 0; width: 100%; padding: 25px 5%;
             display: flex; justify-content: space-between; align-items: center;
-            z-index: 1000; backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--glass-border);
+            z-index: 1000; backdrop-filter: blur(15px); border-bottom: 1px solid var(--glass-border);
         }
-        .nav-logo { font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 1.2rem; color: var(--accent-color); }
-        .nav-links { display: flex; gap: 25px; }
-        .nav-links a { 
-            color: white; text-decoration: none; font-size: 0.9rem; 
-            letter-spacing: 2px; transition: 0.3s; opacity: 0.7;
-        }
-        .nav-links a:hover { opacity: 1; color: var(--accent-color); text-shadow: 0 0 10px var(--accent-color); }
+        .nav-logo { font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 1.5rem; color: var(--accent-color); text-shadow: var(--glow-strength); transition: 1s; }
+        .nav-links { display: flex; align-items: center; }
+        .nav-links a { color: white; text-decoration: none; font-size: 0.8rem; letter-spacing: 2px; margin-left: 30px; opacity: 0.7; transition: 0.3s; }
+        .nav-links a:hover { opacity: 1; color: var(--accent-color); text-shadow: var(--glow-strength); }
 
-        /* === 2. CUSTOM CURSOR === */
+        .shop-nav-btn { border: 1px solid var(--accent-color); padding: 8px 15px; border-radius: 4px; background: rgba(0, 243, 255, 0.05); transition: 0.3s !important; }
+        .shop-nav-btn:hover { background: var(--accent-color) !important; color: black !important; }
+
         .cursor-dot, .cursor-circle { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9999; pointer-events: none; }
-        .cursor-dot { width: 6px; height: 6px; background: var(--accent-color); box-shadow: 0 0 10px var(--accent-color); }
-        .cursor-circle { width: 35px; height: 35px; border: 1px solid rgba(0, 243, 255, 0.3); transition: width 0.3s, height 0.3s, background 0.3s; }
-        body.hovering .cursor-circle { width: 60px; height: 60px; background: rgba(0, 243, 255, 0.1); border-color: var(--accent-color); }
+        .cursor-dot { width: 6px; height: 6px; background: var(--accent-color); box-shadow: var(--glow-strength); transition: background 1s; }
+        .cursor-circle { width: 40px; height: 40px; border: 1px solid var(--accent-color); transition: border 1s, width 0.3s, height 0.3s; }
+        body.hovering .cursor-circle { width: 60px; height: 60px; background: rgba(255,255,255,0.05); }
 
-        /* === 3. HERO & GRID === */
         header { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        .hero-title { font-family: 'Syncopate', sans-serif; font-size: 6vw; text-shadow: 3px 3px var(--secondary-color); }
-        
+        .hero-title { font-family: 'Syncopate', sans-serif; font-size: 8vw; text-transform: uppercase; margin: 0; line-height: 1; }
+        .hero-btns { margin-top: 30px; display: flex; gap: 20px; }
+        .hero-btn { text-decoration: none; color: white; font-family: 'Syncopate'; font-size: 0.8rem; letter-spacing: 2px; padding: 15px 30px; border: 1px solid var(--glass-border); transition: 0.3s; }
+        .hero-btn.primary { border-color: var(--accent-color); background: rgba(0,0,0,0.5); }
+        .hero-btn:hover { background: var(--accent-color); color: black; box-shadow: var(--glow-strength); }
+
+        .about-section { padding: 120px 5%; position: relative; }
+        .about-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; }
+
+        .personal-card { background: var(--glass-bg); border: 1px solid var(--glass-border); padding: 40px; border-radius: 20px; backdrop-filter: blur(10px); }
+        .info-row { margin-bottom: 20px; display: flex; flex-direction: column; }
+        .info-label { font-size: 0.7rem; letter-spacing: 2px; color: var(--accent-color); text-transform: uppercase; margin-bottom: 5px; }
+
+        .about-text h2 { font-family: 'Syncopate'; font-size: 2.5rem; margin-bottom: 20px; }
+        .skill-bar { margin-bottom: 25px; }
+        .progress-bg { background: rgba(255,255,255,0.05); height: 4px; border-radius: 10px; }
+        .progress-fill { background: var(--accent-color); height: 100%; width: 0; transition: 2s ease-out; box-shadow: var(--glow-strength); }
+
         .container { max-width: 1400px; margin: 0 auto; padding: 100px 5%; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; }
+        .card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 15px; overflow: hidden; transition: 0.4s; }
+        .card:hover { border-color: var(--accent-color); transform: translateY(-10px); }
+        .card-thumbnail { height: 240px; background-size: cover; background-position: center; position: relative; }
+        .play-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.7); display: flex; justify-content: center; align-items: center; opacity: 0; transition: 0.3s; }
+        .card:hover .play-overlay { opacity: 1; }
+        
+        .external-btn { text-decoration: none; padding: 10px 20px; border: 1px solid var(--accent-color); color: white; font-size: 0.7rem; transition: 0.3s; text-transform: uppercase; border-radius: 4px; }
+        .external-btn:hover { background: var(--accent-color); color: black; box-shadow: var(--glow-strength); }
 
-        .card { 
-            background: var(--glass-bg); border: 1px solid var(--glass-border); 
-            border-radius: 15px; overflow: hidden; backdrop-filter: blur(10px);
-        }
+        .contact-section { padding: 100px 5%; text-align: center; border-top: 1px solid var(--glass-border); }
+        .social-container { display: flex; justify-content: center; gap: 30px; margin: 40px 0; flex-wrap: wrap; }
+        .social-box { background: var(--glass-bg); border: 1px solid var(--glass-border); padding: 20px 40px; border-radius: 10px; text-decoration: none; color: white; display: flex; flex-direction: column; align-items: center; gap: 10px; transition: 0.4s; min-width: 180px; }
+        .social-box i { font-size: 2rem; color: var(--accent-color); transition: 1s; }
+        .social-box:hover { border-color: var(--accent-color); transform: translateY(-10px); box-shadow: var(--glow-strength); }
 
-        .card-thumbnail { width: 100%; height: 230px; background-size: cover; position: relative; }
-        .play-button { 
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 50px; height: 50px; border: 1px solid var(--accent-color); border-radius: 50%;
-            display: flex; justify-content: center; align-items: center; background: rgba(0,0,0,0.5);
-        }
+        .email-display { font-family: 'Syncopate'; font-size: 1.5rem; color: var(--accent-color); margin-bottom: 20px; display: block; text-decoration: none; transition: 1s; }
 
-        /* === 4. CONTACT & SOCIALS SECTION === */
-        .contact-section {
-            padding: 100px 5%; text-align: center;
-            background: linear-gradient(to bottom, transparent, rgba(112, 0, 255, 0.05));
-        }
-        .social-icons { display: flex; justify-content: center; gap: 40px; margin: 40px 0; }
-        .social-icons a { font-size: 2rem; color: white; transition: 0.4s; }
-        .social-icons a:hover { color: var(--accent-color); transform: translateY(-10px); }
-
-        .contact-btn {
-            padding: 15px 40px; border: 1px solid var(--accent-color);
-            background: transparent; color: white; font-family: 'Syncopate';
-            font-size: 0.8rem; letter-spacing: 3px; transition: 0.3s;
-        }
-        .contact-btn:hover { background: var(--accent-color); color: black; box-shadow: 0 0 30px var(--accent-color); }
-
-        /* === LIGHTBOX === */
-        .lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 5000; display: none; justify-content: center; align-items: center; }
+        /* MODAL FIX FOR SHORTS */
+        .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 5000; display: none; justify-content: center; align-items: center; }
         .lightbox.active { display: flex; }
-        .video-wrapper { width: 80%; aspect-ratio: 16/9; }
+        .video-container { width: 90%; max-width: 400px; aspect-ratio: 9/16; position: relative; }
+        iframe { width: 100%; height: 100%; border: 1px solid var(--glass-border); }
 
-        footer { padding: 50px; text-align: center; color: #444; font-size: 0.7rem; letter-spacing: 2px; }
+        footer { padding: 60px; text-align: center; border-top: 1px solid var(--glass-border); font-size: 0.7rem; opacity: 0.5; }
 
-        @media(max-width: 768px) {
-            .nav-links { display: none; }
-            .hero-title { font-size: 3rem; }
-        }
+        @media(max-width: 900px) { .hero-title { font-size: 15vw; } .hero-btns { flex-direction: column; } }
     </style>
 </head>
 <body>
@@ -100,126 +101,197 @@
     <div class="cursor-circle"></div>
 
     <nav>
-        <div class="nav-logo">VFX.CORE</div>
+        <div class="nav-logo">JOKER VFX</div>
         <div class="nav-links">
-            <a href="#work">PORTFOLIO</a>
-            <a href="https://your-shop-link.com" target="_blank"><i class="fas fa-shopping-cart"></i> SHOP</a>
+            <a href="#about">ABOUT</a>
+            <a href="#work">WORK</a>
             <a href="#contact">CONTACT</a>
+           <a href="https://payhip.com/JokerVFX" target="_blank" class="shop-nav-btn"><i class="fas fa-bag-shopping" style="margin-right: 8px;"></i>SHOP</a>
         </div>
     </nav>
 
     <header>
-        <div class="hero-title">JOKERVFX</div>
-        <p style="letter-spacing: 8px; color: #888;">VISUAL EFFECTS & MOTION</p>
+        <div class="hero-title glow-text">JOKER</div>
+        <div style="letter-spacing: 15px; font-size: 0.9rem; margin-top: 10px; opacity: 0.6;">EDITOR | CINEMATOGRAPHER | MOTION GRAPHICS</div>
+        <div class="hero-btns">
+            <a href="#about" class="hero-btn">ABOUT ME</a>
+        </div>
     </header>
 
+    <section class="about-section" id="about">
+        <div class="about-container">
+            <div class="personal-card" data-tilt>
+                <h3 style="font-family: 'Syncopate'; margin-top: 0; font-size: 1rem;">Personal File</h3>
+                <div class="info-row"><span class="info-label">Identity</span><span>JokerVFX</span></div>
+                <div class="info-row"><span class="info-label">I AM FROM </span><span>UTTARAKHAND</span></div>
+            </div>
+            <div class="about-text">
+                <h2 class="glow-text">ABOUT MYSELF</h2>
+                <p> I am Kamlesh,
+                    Video Editor | Cinematographer | Motion Designer
+Turning vision into cinematic reality — one frame at a time. </p>
+                <div class="skill-bar">
+                    <div class="progress-bg"><div class="progress-fill" data-percent="95%"></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <div class="container" id="work">
-        <div class="grid">
-            <div class="card" data-tilt onclick="openVideo('https://www.youtube.com/embed/dQw4w9WgXcQ')">
-                <div class="card-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1535016120720-40c6874c3b13?auto=format&fit=crop&w=800&q=80');">
-                    <div class="play-button"><i class="fas fa-play"></i></div>
-                </div>
-                <div class="card-info" style="padding: 20px;">
-                    <h3>PROJECT ALPHA</h3>
-                    <div style="font-size: 0.7rem; color: var(--accent-color); margin-top: 10px;">[ VIEW REEL ]</div>
-                </div>
-            </div>
-            </div>
+        <div class="grid" id="project-grid"></div>
     </div>
 
     <section class="contact-section" id="contact">
-        <h2 style="font-family: 'Syncopate';">GET IN TOUCH</h2>
-        
-        <div class="social-icons">
-            <a href="https://youtube.com/@VFXBoyJOKER__ITSTimeToChange" target="_blank"><i class="fab fa-youtube"></i></a>
-            <a href="https://www.instagram.com/_kamlesh.02" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="t.me/jokervfxae" target="_blank"><i class="fab fa-telegram"></i></a>
-            <a href="mailto:kamleshgoswami243@email.com"><i class="fas fa-envelope"></i></a>
-        </div>
-
-        <button class="contact-btn" onclick="location.href='mailto:your@gmail.com'">START A PROJECT</button>
+        <h2 class="glow-text" style="font-family: 'Syncopate';">GET IN TOUCH</h2>
+        <a href="mailto:your-kamleshgoswami243@gmail.com" class="email-display glow-text">YOUR-kamleshgoswami243@GMAIL.COM</a>
+        <div class="social-container">
+    <a href="https://www.youtube.com/@VFXBoyJOKER__ITSTimeToChange" target="_blank" class="social-box" data-tilt>
+        <i class="fab fa-youtube"></i>
+        <span>YOUTUBE</span>
+    </a>
+    <a href="https://www.instagram.com/_kamlesh.02?igsh=MXI3dWR5dDB2Njh0dA%3D%3D&utm_source=qr" target="_blank" class="social-box" data-tilt>
+        <i class="fab fa-instagram"></i>
+        <span>INSTAGRAM</span>
+    </a>
+    <a href="https://www.behance.net/gallery/218237279/portfolio" target="_blank" class="social-box" data-tilt>
+        <i class="fab fa-artstation"></i>
+        <span>PORTFOLIO</span>
+    </a>
+   <a href="https://payhip.com/JokerVFX" target="_blank" class="social-box" data-tilt>
+        <i class="fas fa-shop"></i>
+        <span>SHOP</span>
+    </a>
+</div>
     </section>
 
-    <div class="lightbox" id="videoModal" onclick="closeVideo()">
-        <div class="video-wrapper">
-            <iframe id="videoFrame" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <div class="lightbox" id="videoModal">
+        <div class="video-container">
+            <div style="position:absolute; top:-40px; right:0; cursor:pointer; font-size: 12px; letter-spacing: 2px;" onclick="closeVideo()">CLOSE [X]</div>
+           <iframe id="videoFrame" 
+        src="" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        referrerpolicy="strict-origin-when-cross-origin"
+        sandbox="allow-forms allow-scripts allow-pointer-lock allow-same-origin allow-top-navigation allow-presentation"
+        allowfullscreen>
+</iframe>
         </div>
     </div>
 
-    <footer>&copy; 2026 JOKERVFX | BUILT FOR THE FUTURE</footer>
+    <footer>JOKER VFX // TERMINAL 2026</footer>
 
     <script>
-        // === VFX PLEXUS BACKGROUND ===
+        // Dynamic Glow Cycle
+        const colors = ['#00f3ff', '#ff00ff', '#00ff44', '#ffff00', '#ff3300'];
+        let colorIdx = 0;
+        setInterval(() => {
+            colorIdx = (colorIdx + 1) % colors.length;
+            document.documentElement.style.setProperty('--accent-color', colors[colorIdx]);
+        }, 3500);
+
+        // Plexus Bg
         const canvas = document.getElementById('vfx-canvas');
         const ctx = canvas.getContext('2d');
-        let particles = [];
-
+        let pts = [];
         function init() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            particles = [];
-            for (let i = 0; i < 80; i++) {
-                particles.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    vx: (Math.random() - 0.5) * 0.5,
-                    vy: (Math.random() - 0.5) * 0.5
-                });
-            }
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+            pts = [];
+            for(let i=0; i<60; i++) pts.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, vx: (Math.random()-0.5)*0.8, vy: (Math.random()-0.5)*0.8 });
         }
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach((p, i) => {
+        function draw() {
+            ctx.clearRect(0,0,canvas.width, canvas.height);
+            const clr = getComputedStyle(document.documentElement).getPropertyValue('--accent-color');
+            pts.forEach((p, i) => {
                 p.x += p.vx; p.y += p.vy;
-                if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-                if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-
-                ctx.fillStyle = 'rgba(0, 243, 255, 0.5)';
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, 1.5, 0, Math.PI * 2);
-                ctx.fill();
-
-                for (let j = i + 1; j < particles.length; j++) {
-                    const p2 = particles[j];
-                    const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
-                    if (dist < 150) {
-                        ctx.strokeStyle = `rgba(0, 243, 255, ${1 - dist / 150})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.beginPath();
-                        ctx.moveTo(p.x, p.y);
-                        ctx.lineTo(p2.x, p2.y);
-                        ctx.stroke();
-                    }
+                if(p.x<0 || p.x>canvas.width) p.vx *= -1; if(p.y<0 || p.y>canvas.height) p.vy *= -1;
+                ctx.fillStyle = clr; ctx.beginPath(); ctx.arc(p.x, p.y, 2, 0, Math.PI*2); ctx.fill();
+                for(let j=i+1; j<pts.length; j++) {
+                    const p2 = pts[j]; const d = Math.hypot(p.x-p2.x, p.y-p2.y);
+                    if(d < 150) { ctx.strokeStyle = clr; ctx.globalAlpha = 1-(d/150); ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y); ctx.stroke(); ctx.globalAlpha = 1; }
                 }
             });
-            requestAnimationFrame(animate);
+            requestAnimationFrame(draw);
+        }
+        window.addEventListener('resize', init); init(); draw();
+
+        // PROJECT DATA - CHANGE /shorts/ TO /embed/ HERE
+        const projects = [
+            { 
+                title: "PROJECT ONE", 
+                cat: "VFX Short", 
+                img: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80", 
+                video: "https://www.youtube.com/embed/jSAGs6-y0UQ",
+                external: "#" 
+            },
+            { 
+                title: "PROJECT TWO", 
+                cat: "VFX Short", 
+                img: "https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?auto=format&fit=crop&w=800&q=80", 
+                video: "https://www.youtube.com/embed/jSAGs6-y0UQ",
+                external: "#" 
+            }
+        ];
+
+        const grid = document.getElementById('project-grid');
+        projects.forEach(p => {
+            grid.innerHTML += `
+                <div class="card" data-tilt>
+                    <div class="card-thumbnail" style="background-image:url('${p.img}')">
+                        <div class="play-overlay" onclick="openVideo('${p.video}')">
+                            <div style="border:1px solid white; padding:10px 20px;">PLAY SHORTS</div>
+                        </div>
+                    </div>
+                    <div style="padding:25px; display:flex; justify-content:space-between; align-items:center;">
+                        <div><h3 style="margin:0; font-size:1rem;">${p.title}</h3></div>
+                        <a href="${p.external}" target="_blank" class="external-btn">VIEW</a>
+                    </div>
+                </div>`;
+        });
+
+      function openVideo(url) { 
+    const modal = document.getElementById('videoModal');
+    const frame = document.getElementById('videoFrame');
+    
+    // SMART FIX: Convert any YT link (shorts or watch) to embed format
+    let videoId = "";
+    if (url.includes('shorts/')) {
+        videoId = url.split('shorts/')[1].split('?')[0];
+    } else if (url.includes('watch?v=')) {
+        videoId = url.split('v=')[1].split('&')[0];
+    } else {
+        videoId = url.split('embed/')[1]?.split('?')[0] || "";
+    }
+
+    const finalUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
+    
+    frame.src = finalUrl;
+    modal.classList.add('active');
+}
+
+        function closeVideo() { 
+            document.getElementById('videoModal').classList.remove('active'); 
+            document.getElementById('videoFrame').src = ""; 
         }
 
-        window.addEventListener('resize', init);
-        init(); animate();
-
-        // === CURSOR & MODAL LOGIC ===
+        // Cursor & Skills
         const dot = document.querySelector('.cursor-dot');
         const circle = document.querySelector('.cursor-circle');
         window.addEventListener('mousemove', e => {
             dot.style.left = circle.style.left = `${e.clientX}px`;
             dot.style.top = circle.style.top = `${e.clientY}px`;
         });
-
-        document.querySelectorAll('a, button, .card').forEach(el => {
-            el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
-            el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+        document.body.addEventListener('mouseover', e => {
+            if(e.target.closest('a, .card, .play-overlay')) document.body.classList.add('hovering');
+            else document.body.classList.remove('hovering');
         });
 
-        function openVideo(url) {
-            document.getElementById('videoModal').classList.add('active');
-            document.getElementById('videoFrame').src = url;
-        }
-        function closeVideo() {
-            document.getElementById('videoModal').classList.remove('active');
-            document.getElementById('videoFrame').src = "";
-        }
+        const skillBars = document.querySelectorAll('.progress-fill');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => { if(e.isIntersecting) e.target.style.width = e.target.dataset.percent; });
+        }, { threshold: 0.5 });
+        skillBars.forEach(b => observer.observe(b));
+
+        VanillaTilt.init(document.querySelectorAll("[data-tilt]"), { max: 10, speed: 400 });
     </script>
 </body>
 </html>
